@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102f35">
+  <meta name="description" content="Compare two home solar system configurations side by side: panels, annual production, upfront cost, estimated savings, and payback. Free, private, and transparent.">
+  <link rel="canonical" href="https://solarfacts.net/compare.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Compare Solar Systems Side by Side | SolarFacts</title>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="announcement"><span class="announcement-dot"></span> Independent solar planning · Transparent assumptions · No sign-up</div>
+<header class="site-header"><div class="container nav-wrap">
+  <a href="index.html" class="logo" aria-label="SolarFacts home"><span class="logo-mark" aria-hidden="true">✳</span> solar<span>facts</span><span class="logo-period">.</span></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation">☰</button>
+  <nav id="main-nav" aria-label="Main navigation" class="main-nav">
+    <a href="index.html#how-it-works">Solar 101</a><a href="index.html#estimator">Solar estimator</a><a href="compare.html" aria-current="page">Compare systems</a><a href="guides.html">Learning guides</a><a href="resources.html">Resources</a>
+    <a href="index.html#estimator" class="nav-cta">Run your estimate ↗</a>
+  </nav>
+</div></header>
+<main id="main">
+<section class="sub-hero comparison-hero"><div class="container">
+  <div class="overline">FREE PLANNING TOOL · 03</div>
+  <h1>Two solar plans.<br><em>One clearer picture.</em></h1>
+  <p>Compare automatically sized solar systems or enter an exact number of panels for each system. Change panel rating, generation targets and installed price to explore preliminary estimates. Both configurations use the same household and utility assumptions. This is a scenario comparison—not a replacement for written installer quotes.</p>
+</div></section>
+<section class="section comparison-area"><div class="container">
+<form id="comparison-form" novalidate>
+  <div class="comparison-heading"><div class="overline">STEP 01 — SHARED ASSUMPTIONS</div><h2>Start with <em>your home.</em></h2><p>These conditions are identical for System A and System B, making the comparison more meaningful.</p></div>
+  <div class="comparison-card comparison-household"><div class="field-grid">
+    <label class="field"><span>Monthly electricity bill ($)</span><div class="input-wrap"><span>$</span><input name="bill" type="number" min="0" max="10000" step="any" value="180" required></div></label>
+    <label class="field"><span>Electricity rate ($/kWh)</span><div class="input-wrap"><span>$</span><input name="electricityRate" type="number" min="0.01" max="2" step="any" value="0.19" required></div></label>
+    <label class="field"><span>Usable roof area (sq ft)</span><div class="input-wrap"><input name="roofArea" type="number" min="0" max="25000" step="any" value="520" required><span class="unit">sq ft</span></div></label>
+    <label class="field"><span>Peak sun hours/day</span><div class="input-wrap"><input name="sunHours" type="number" min="1" max="8" step="any" value="5" required></div></label>
+    <label class="field"><span>Self-consumed solar energy</span><div class="input-wrap"><input name="selfUsePercent" type="number" min="0" max="100" step="any" value="65" required><span class="unit">%</span></div></label>
+    <label class="field"><span>Exported energy value ($/kWh)</span><div class="input-wrap"><span>$</span><input name="exportRate" type="number" min="0" max="2" step="any" value="0.06" required></div></label>
+  </div></div>
+  <div class="comparison-heading"><div class="overline">STEP 02 — TWO CONFIGURATIONS</div><h2>Change what <em>matters.</em></h2><p>Choose automatic sizing by target annual generation, or manual sizing by panel count, independently for each system. A manual panel count must fit the entered usable roof area (modeled at 24 sq ft per panel).</p></div>
+  <div class="compare-input-grid">
+    <fieldset class="comparison-card compare-option"><legend><span class="option-letter">A</span> System A</legend>
+      <label class="field"><span>How to choose panel count</span><select name="sizingModeA" class="compare-mode-select" aria-label="System A panel sizing method"><option value="auto">Automatic — generation target</option><option value="manual">Manual — number of panels</option></select></label>
+      <div data-auto-fields="A"><label class="field"><span>Target annual generation (% of usage)</span><div class="input-wrap"><input name="targetOffsetA" type="number" min="10" max="100" step="any" value="70" required><span class="unit">%</span></div></label></div>
+      <div data-manual-fields="A" hidden><label class="field"><span>Number of solar panels</span><div class="input-wrap"><input name="manualPanelsA" type="number" min="1" max="2000" step="1" value="12" required disabled><span class="unit">panels</span></div></label><p class="compare-roof-note" data-roof-note="A" role="status"></p></div>
+      <label class="field"><span>Panel rating</span><div class="input-wrap"><input name="panelWattsA" type="number" min="200" max="800" step="any" value="400" required><span class="unit">W</span></div></label>
+      <label class="field"><span>Installed system price ($/W)</span><div class="input-wrap"><span>$</span><input name="installationCostPerWattA" type="number" min="0.5" max="12" step="any" value="2.65" required></div></label>
+    </fieldset>
+    <fieldset class="comparison-card compare-option compare-option-b"><legend><span class="option-letter">B</span> System B</legend>
+      <label class="field"><span>How to choose panel count</span><select name="sizingModeB" class="compare-mode-select" aria-label="System B panel sizing method"><option value="auto">Automatic — generation target</option><option value="manual">Manual — number of panels</option></select></label>
+      <div data-auto-fields="B"><label class="field"><span>Target annual generation (% of usage)</span><div class="input-wrap"><input name="targetOffsetB" type="number" min="10" max="100" step="any" value="100" required><span class="unit">%</span></div></label></div>
+      <div data-manual-fields="B" hidden><label class="field"><span>Number of solar panels</span><div class="input-wrap"><input name="manualPanelsB" type="number" min="1" max="2000" step="1" value="16" required disabled><span class="unit">panels</span></div></label><p class="compare-roof-note" data-roof-note="B" role="status"></p></div>
+      <label class="field"><span>Panel rating</span><div class="input-wrap"><input name="panelWattsB" type="number" min="200" max="800" step="any" value="450" required><span class="unit">W</span></div></label>
+      <label class="field"><span>Installed system price ($/W)</span><div class="input-wrap"><span>$</span><input name="installationCostPerWattB" type="number" min="0.5" max="12" step="any" value="3.05" required></div></label>
+    </fieldset>
+  </div>
+  <div class="compare-actions"><button type="submit" class="btn btn-primary">Compare the systems ↗</button><p>Calculated locally in your browser. Nothing is submitted.</p></div>
+  <p id="comparison-error" class="note" role="alert" hidden></p>
+</form>
+<div id="comparison-results" aria-live="polite" hidden>
+  <div class="comparison-heading"><div class="overline">STEP 03 — YOUR RESULTS</div><h2>See the <em>trade-offs.</em></h2><p>Both estimates use the SolarFacts calculation model, including 25 years of modeled savings. Figures are rounded for readability.</p></div>
+  <div class="compare-table-wrap"><table class="compare-table"><caption>Modeled solar system comparison</caption><thead><tr><th scope="col">Metric</th><th scope="col">System A</th><th scope="col">System B</th></tr></thead><tbody>
+    <tr><th scope="row">Sizing method</th><td data-metric="method-a"></td><td data-metric="method-b"></td></tr>
+    <tr><th scope="row">Panel count</th><td data-metric="panels-a"></td><td data-metric="panels-b"></td></tr>
+    <tr><th scope="row">System capacity</th><td data-metric="capacity-a"></td><td data-metric="capacity-b"></td></tr>
+    <tr><th scope="row">Annual production</th><td data-metric="production-a"></td><td data-metric="production-b"></td></tr>
+    <tr><th scope="row">Upfront installed cost</th><td data-metric="cost-a"></td><td data-metric="cost-b"></td></tr>
+    <tr><th scope="row">First-year net savings</th><td data-metric="savings-a"></td><td data-metric="savings-b"></td></tr>
+    <tr><th scope="row">Modeled payback</th><td data-metric="payback-a"></td><td data-metric="payback-b"></td></tr>
+    <tr><th scope="row">25-year net benefit</th><td data-metric="benefit-a"></td><td data-metric="benefit-b"></td></tr>
+  </tbody></table></div>
+  <div class="comparison-summary"><strong>What these numbers suggest</strong><p id="comparison-summary"></p><p id="comparison-roof-note"></p></div>
+  <div class="utility-actions"><button id="save-comparison" type="button" class="btn btn-primary" disabled>Download comparison CSV ↗</button><a class="btn btn-outline" href="checklist.html">Get the buyer checklist ↗</a></div>
+  <div class="muted-banner"><strong>Read before deciding:</strong> This simple model assumes a constant performance ratio, specified sun hours, average electricity price and fixed self-use/export split. It excludes financing, tax credits, roof angle, shading, utility tariffs, system replacements, and installer-specific warranties. The 25-year estimate is not a forecast or guarantee. Verify all numbers using location-specific studies and actual proposals.</div>
+</div>
+</div></section>
+</main>
+<footer class="footer"><div class="container footer-bottom"><span>© <span id="year">2026</span> SolarFacts.net · Independent educational information.</span><span><a href="guides.html">Learning guides</a> · <a href="resources.html">Resources</a> · <a href="privacy.html">Privacy</a></span></div></footer>
+<script type="module" src="js/compare-page.js"></script>
+</body></html>

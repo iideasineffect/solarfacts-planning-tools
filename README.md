@@ -11,6 +11,7 @@ A complete, responsive static website for **SolarFacts.net**. Includes an educat
 - Optional assumptions for equipment, rates, export value, maintenance, utility rate escalation and degradation.
 - Client-side CSV export and print layout.
 - Independent battery runtime tool.
+- Side-by-side solar system scenario comparison (`compare.html` / `js/comparison.js`) with CSV export and automated tests.
 - Learning guides, commercial/independent resources, printable buyer checklist and privacy notice.
 - No website visitors' calculator inputs are uploaded, and no analytics trackers or mailing list forms ship in the project.
 - Automated unit tests using Node's built-in test runner; no API tokens required.
@@ -102,3 +103,20 @@ Official research resources:
 ## Disclosure
 
 Educational estimates only. Not engineering, electrical, tax or financial advice. This project is not affiliated with any solar equipment brand, retailer, utility, the IRS, or the National Lab of the Rockies.
+
+## V1.1 — Side-by-side comparison feature
+
+Visit `compare.html`. Enter shared household assumptions, then choose two illustrative configurations with different target generation, panel power and $/W installed cost. The comparison calls the existing `calculateSolar()` function for each case instead of duplicating the calculation engine. It displays both results in a table and exports a client-side CSV.
+
+**Important:** This compares modeled scenarios, not fixed panel quotes. The calculator chooses a panel count to approximate the specified annual generation target, respecting usable roof area. An actual installer quote may use other panel counts, inverter specifications and tariff assumptions. Neither configuration is presented as a recommendation. No site-specific incentives or financing are included. All data stays in the visitor's browser.
+
+Validation and regression tests: `npm test`. Production build: `npm run build`. The feature is also linked in navigation; add `compare.html` to the site sitemap when deploying.
+
+## V1.2 — Choose automatic or manual panel count
+
+The comparison tool at `compare.html` now has an independent **panel sizing method** selector for System A and System B:
+
+- **Automatic:** Use a target annual generation percentage; the original model sizes the panel count and limits it to available roof area.
+- **Manual:** Enter an exact whole-number panel count from 1 to 2,000; the model uses that count directly **only if it fits** the entered usable roof area. Exceeding the modeled roof capacity displays a warning and blocks that comparison until the input is corrected. The tool assumes 24 sq ft of usable roof per panel by default; actual installation requirements vary.
+
+Both modes use the same electricity, production, maintenance and financial calculations. The comparison table and CSV identify the sizing mode, and the CSV includes requested manual counts and modeled generation offset. The inputs remain local to the browser; values are preliminary examples, not engineering designs or quotes. Tests include manual counts, roof-space warnings and mixed-mode scenarios.

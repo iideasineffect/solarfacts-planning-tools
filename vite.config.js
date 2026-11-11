@@ -6,6 +6,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         home: resolve(import.meta.dirname, 'index.html'),
+        compare: resolve(import.meta.dirname, 'compare.html'),
         guides: resolve(import.meta.dirname, 'guides.html'),
         resources: resolve(import.meta.dirname, 'resources.html'),
         checklist: resolve(import.meta.dirname, 'checklist.html'),

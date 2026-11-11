@@ -38,6 +38,15 @@ export function normalizeInputs(values = {}) {
     }
     input[key] = number;
   }
+  // Optional fixed panel count is used only by manual sizing. An omitted
+  // manualPanels field retains the estimator's original automatic behavior.
+  if (Object.hasOwn(values, 'manualPanels')) {
+    const count = Number(values.manualPanels);
+    if (!Number.isSafeInteger(count) || count < 1 || count > 2000) {
+      throw new RangeError('Manual panel count must be a whole number between 1 and 2000.');
+    }
+    input.manualPanels = count;
+  }
   return input;
 }
 
@@ -49,8 +58,16 @@ export function calculateSolar(values = {}) {
   const annualUseKwh = monthlyKwh * 12;
   const productionPerKw = input.sunHours * 365 * input.performanceRatio;
   const requiredKw = (annualUseKwh * (input.targetOffset / 100)) / productionPerKw;
-  const wantedPanels = Math.ceil(requiredKw * 1000 / input.panelWatts);
-  const panels = Math.max(0, Math.min(maxPanels, wantedPanels));
+  const manualMode = Object.hasOwn(input, 'manualPanels');
+  const wantedPanels = manualMode
+    ? input.manualPanels
+    : Math.ceil(requiredKw * 1000 / input.panelWatts);
+  // Never silently reduce a manually requested panel count: the displayed
+  // design must match the number entered by the visitor.
+  if (manualMode && wantedPanels > maxPanels) {
+    throw new RangeError(`Manual panel count (${wantedPanels}) exceeds available roof capacity (${maxPanels} panels at ${input.panelFootprint} sq ft per panel). Reduce the panel count or increase usable roof area.`);
+  }
+  const panels = manualMode ? wantedPanels : Math.max(0, Math.min(maxPanels, wantedPanels));
   const systemKw = panels * input.panelWatts / 1000;
   const annualProductionKwh = systemKw * productionPerKw;
   const annualSelfUsedKwh = Math.min(annualProductionKwh * input.selfUsePercent / 100, annualUseKwh);
@@ -78,7 +95,7 @@ export function calculateSolar(values = {}) {
     cashflow.push({ year, savings, cumulative, netPosition: cumulative - grossCost });
   }
   return {
-    inputs: input, panels, maxPanels, roofLimited: panels < wantedPanels, systemKw,
+    inputs: input, panels, maxPanels, roofLimited: !manualMode && panels < wantedPanels, systemKw,
     monthlyKwh, annualUseKwh, annualProductionKwh, monthlyProductionKwh: annualProductionKwh / 12,
     annualSelfUsedKwh, annualExportKwh, generationOffsetPct, grossCost,
     firstYearValue, firstYearNetSavings, paybackYears,
